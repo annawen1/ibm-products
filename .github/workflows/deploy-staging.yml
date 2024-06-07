@@ -2,7 +2,7 @@ name: Deploy staging (Deploy storybook environment to Github Pages)
 
 on:
   workflow_run:
-    workflows: [Release base]
+    workflows: [Minor release]
     types: [completed]
 concurrency:
   group: deploy-next-${{ github.ref }}
