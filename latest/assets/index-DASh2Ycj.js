@@ -1,0 +1,1 @@
+import{F as r}from"./deprecate-BLSDO8J_.js";import{P as e}from"./index-BRV0Se7Z.js";import{r as o}from"./index-CTjT7uj6.js";const a=o.createContext(r);e.node,e.objectOf(e.bool);function u(t){return o.useContext(a).enabled(t)}export{u};
