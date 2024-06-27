@@ -1,5 +1,0 @@
-import{j as p}from"./settings-CRrTVbgr.js";import{T as c}from"./TooltipTrigger-WMYPQ1m2.js";import{b as d}from"./bucket-10-CRhHam0s.js";import"./index-CTjT7uj6.js";import"./index-BU4hwJwl.js";import"./index-BRV0Se7Z.js";import"./deprecate-BLSDO8J_.js";import"./events-D0gen66i.js";import"./index-DN5spsdJ.js";const T="",E={title:"IBM Products/Internal/TooltipTrigger",component:c,parameters:{styles:T},tags:["autodocs"]},m=g=>p.jsx(c,{...g}),r=m.bind({});r.args={children:p.jsx(d,{size:16})};const o=m.bind({});o.args={children:"Text"};var e,t,s;r.parameters={...r.parameters,docs:{...(e=r.parameters)==null?void 0:e.docs,source:{originalSource:`args => {
-  return <TooltipTrigger {...args} />;
-}`,...(s=(t=r.parameters)==null?void 0:t.docs)==null?void 0:s.source}}};var a,i,n;o.parameters={...o.parameters,docs:{...(a=o.parameters)==null?void 0:a.docs,source:{originalSource:`args => {
-  return <TooltipTrigger {...args} />;
-}`,...(n=(i=o.parameters)==null?void 0:i.docs)==null?void 0:n.source}}};const M=["Icon","Text"];export{r as Icon,o as Text,M as __namedExportsOrder,E as default};

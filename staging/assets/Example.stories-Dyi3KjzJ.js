@@ -1,3 +1,0 @@
-import{R as s}from"./index-CTjT7uj6.js";const n="ExampleCommunityComponent",o=()=>s.createElement("p",{className:"example"},"an example component");o.displayName=n;const p=o;o.__docgenInfo={description:"",methods:[],displayName:"ExampleCommunityComponent"};const c={title:"Community/Components/Example",component:p,tags:["autodocs"]},e={args:{}};var a,t,m;e.parameters={...e.parameters,docs:{...(a=e.parameters)==null?void 0:a.docs,source:{originalSource:`{
-  args: {}
-}`,...(m=(t=e.parameters)==null?void 0:t.docs)==null?void 0:m.source}}};const l=["Default"];export{e as Default,l as __namedExportsOrder,c as default};
