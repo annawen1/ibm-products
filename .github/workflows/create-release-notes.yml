@@ -39,8 +39,7 @@ jobs:
           branch: 'release/${{ github.event.inputs.tag }}'
       - name: Create Pull Request
         run: |
-          gh pr create -B main -H release/${{ github.event.inputs.tag }} --title 'chore(release): ${{ github.event.inputs.tag }}' --body
-            'Automated release PR for ${{ github.event.inputs.tag }}
+          gh pr create -B main -H release/${{ github.event.inputs.tag }} --title 'chore(release): ${{ github.event.inputs.tag }}' --body 'Automated release PR for ${{ github.event.inputs.tag }}
 
             **Checklist**
 
