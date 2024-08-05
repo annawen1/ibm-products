@@ -38,17 +38,12 @@ jobs:
         with:
           branch: 'release/${{ github.event.inputs.tag }}'
       - name: Create Pull Request
-        uses: peter-evans/create-pull-request@c5a7806660adbe173f04e3e038b0ccdcd758773c # v6.1.0
-        with:
-          branch: 'release/${{ github.event.inputs.tag }}'
-          commit-message: 'chore(release): ${{ github.event.inputs.tag }}'
-          base: 'main'
-          title: 'chore(release): ${{ github.event.inputs.tag }}'
-          token: ${{ secrets.GITHUB_TOKEN }}
-          body: |
+        run: gh pr create -B main -H release/${{ github.event.inputs.tag }} --title 'chore(release) ${{ github.event.inputs.tag }}' --body '
             Automated release PR for ${{ github.event.inputs.tag }}
 
             **Checklist**
 
             - [ ] Verify package version bumps are accurate
-            - [ ] Verify CI passes as expected
+            - [ ] Verify CI passes as expected'
+        env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
