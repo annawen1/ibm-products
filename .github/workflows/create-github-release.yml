@@ -43,7 +43,6 @@ jobs:
           branch: 'release/${{ github.event.inputs.tag }}'
           commit-message: 'chore(release): ${{ github.event.inputs.tag }}'
           base: 'main'
-          delete-branch: true
           title: 'chore(release): ${{ github.event.inputs.tag }}'
           token: ${{ secrets.GITHUB_TOKEN }}
           body: |
