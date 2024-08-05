@@ -1,0 +1,50 @@
+# Creates GitHub release with notes and PR to merge changelog and version bumps to `main`
+name: Create github release
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        # Recently published version
+        required: true
+        description: 'release tag'
+        type: string
+        default: 2.46.0-rc.0
+      previous-tag:
+        # Previous release tag to grab changelogs from
+        required: true
+        description: 'previous release tag'
+        type: string
+        default: '2.45.0'
+      create-pr:
+        # set to true to create PR to merge changes from release to `main` branch
+        required: true
+        description: 'Create PR?'
+        type: boolean
+        default: true
+
+jobs:
+  create-pull-request:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    if: github.event.inputs.create-pr == 'true'
+    steps:
+      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 #v4.1.1
+        with:
+          fetch-depth: '0'
+      - uses: peterjgrainger/action-create-branch@v2.2.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          branch: 'release/${{ github.event.inputs.tag }}'
+      - name: Create Pull Request
+        run: |
+          gh pr create -B main -H release/${{ github.event.inputs.tag }} --title 'chore(release): ${{ github.event.inputs.tag }}' --body
+            'Automated release PR for ${{ github.event.inputs.tag }}
+
+            **Checklist**
+
+            - [ ] Verify package version bumps are accurate
+            - [ ] Verify CI passes as expected'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
