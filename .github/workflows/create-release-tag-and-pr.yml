@@ -59,11 +59,10 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 60
     steps:
-      - uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea #v7.0.1
+      - name: Run changelog script
         id: run-changelog
-        with:
-          script: |
-            node ./scripts/get-changelog.js -f ${{ github.event.inputs.tag }} -t ${{ github.event.inputs.previous-tag }} >> echo "PUBLISH=--yes" >> $GITHUB_ENV
+        run: |
+          node ./scripts/get-changelog.js -f ${{ github.event.inputs.tag }} -t ${{ github.event.inputs.previous-tag }}
       - uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea #v7.0.1
         with:
           script: |
