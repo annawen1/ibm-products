@@ -64,13 +64,11 @@ jobs:
         with:
           node-version: '20.x'
           registry-url: https://registry.npmjs.org
-          cache: 'yarn'
 
       - name: Run changelog script
         id: run-changelog
-        working-directory: '.'
         run: |
-          node ./scripts/get-changelog.js -f ${{ github.event.inputs.previous-tag }} -t ${{ github.event.inputs.tag }}
+          node ${{ github.action_path }}/scripts/get-changelog.js -f ${{ github.event.inputs.previous-tag }} -t ${{ github.event.inputs.tag }}
 
       - uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea #v7.0.1
         with:
