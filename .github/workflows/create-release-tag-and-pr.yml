@@ -8,15 +8,19 @@ on:
       tag:
         # Recently published version
         required: true
-        description: 'release tag'
+        description: 'release tag (ie. v2.46.0-rc.0)'
         type: string
-        default: 2.46.0-rc.0
+        default: 'v2.46.0-rc.0'
       previous-tag:
         # Previous release tag to grab changelogs from
+        # To pick the previous tag:
+        # - If published tag is the first release candidate, choose the previous full release tag.
+        # - If published tag is a subsequent release candidate, choose the previous release candidate.
+        # - If published tag is a full release, choose the previous full release tag.
         required: true
-        description: 'previous release tag'
+        description: 'previous release tag (ie. v2.45.0)'
         type: string
-        default: '2.45.0'
+        default: 'v2.45.0'
       create-pr:
         # set to true to create PR to merge changes from release to `main` branch
         required: true
@@ -56,13 +60,20 @@ jobs:
     timeout-minutes: 60
     steps:
       - uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea #v7.0.1
+        id: run-changelog
         with:
           script: |
+            node ./scripts/get-changelog.js -f ${{ github.event.inputs.tag }} -t ${{ github.event.inputs.previous-tag }} >> echo "PUBLISH=--yes" >> $GITHUB_ENV
+      - uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea #v7.0.1
+        with:
+          script: |
+            echo "${{ steps.set-result.outputs.result }}"
             github.rest.repos.createRelease({
-              tag_name: context.ref,
-              name: '${{ github.ref_name }}',
+              tag_name: ${{ github.event.inputs.tag }},
+              name: '${{ github.event.inputs.tag }}',
               draft: false,
               prerelease: true,
               owner: context.repo.owner,
               repo: context.repo.repo,
+              body: ${{ steps.set-result.outputs.result }}
             })

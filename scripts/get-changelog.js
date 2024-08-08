@@ -50,7 +50,7 @@ const delimiter = '----DELIMITER----';
 
 // We keep a list of commits that are process-oriented that we never want to
 // show up in generated changelogs
-const headerDenyList = [
+const denyList = [
   'chore(release): publish [skip ci]',
   'chore(telemetry): update telemetry config',
 ];
@@ -99,12 +99,11 @@ function getChangelog(pkgName, folder) {
   const commitsInFolder = getCommits(folder);
 
   const commitsArray = commitsInFolder.filter((commit) => {
-    headerDenyList.forEach((deny) => {
+    for (const deny of denyList) {
       if (commit.includes(deny)) {
         return false;
       }
-    });
-
+    }
     return true;
   });
 
