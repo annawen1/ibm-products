@@ -74,7 +74,9 @@ jobs:
       - name: Run changelog script
         id: run-changelog
         run: |
+          echo 'var<<EOF' >> $GITHUB_OUTPUT
           node ./scripts/get-changelog.js -f ${{ github.event.inputs.previous-tag }} -t ${{ github.event.inputs.tag }} >> $GITHUB_OUTPUT
+          echo 'EOF' >> $GITHUB_OUTPUT
 
       - uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea #v7.0.1
         with:
