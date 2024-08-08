@@ -74,12 +74,12 @@ jobs:
       - name: Run changelog script
         id: run-changelog
         run: |
-          node ./scripts/get-changelog.js -f ${{ github.event.inputs.previous-tag }} -t ${{ github.event.inputs.tag }} >> changelog.txt
+          node ./scripts/get-changelog.js -f ${{ github.event.inputs.previous-tag }} -t ${{ github.event.inputs.tag }} >> $GITHUB_OUTPUT
 
       - uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea #v7.0.1
         with:
           script: |
-            echo "${{ steps.run-changelog.outputs.result }}"
+            echo "${{ steps.run-changelog.outputs }}"
             github.rest.repos.createRelease({
               tag_name: ${{ github.event.inputs.tag }},
               name: '${{ github.event.inputs.tag }}',
@@ -87,5 +87,5 @@ jobs:
               prerelease: true,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: changelog.txt
+              body: ${{ steps.run-changelog.outputs }}
             })
