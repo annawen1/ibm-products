@@ -75,13 +75,14 @@ jobs:
         id: run-changelog
         run: |
           echo 'var<<EOF' >> $GITHUB_OUTPUT
-          node ./scripts/get-changelog.js -f ${{ github.event.inputs.previous-tag }} -t ${{ github.event.inputs.tag }} >> $GITHUB_OUTPUT
+          SECRET_HANDLE=$(node ./scripts/get-changelog.js -f ${{ github.event.inputs.previous-tag }} -t ${{ github.event.inputs.tag }})
+          echo "handle=$SECRET_HANDLE" >> "$GITHUB_OUTPUT"
           echo 'EOF' >> $GITHUB_OUTPUT
 
       - uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea #v7.0.1
         with:
           script: |
-            echo "${{ steps.run-changelog.outputs }}"
+            echo "${{ steps.run-changelog.outputs.handle }}"
             github.rest.repos.createRelease({
               tag_name: ${{ github.event.inputs.tag }},
               name: '${{ github.event.inputs.tag }}',
@@ -89,5 +90,5 @@ jobs:
               prerelease: true,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: ${{ steps.run-changelog.outputs }}
+              body: ${{ steps.run-changelog.outputs.handle }}
             })
