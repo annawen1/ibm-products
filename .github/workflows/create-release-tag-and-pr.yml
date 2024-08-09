@@ -93,5 +93,5 @@ jobs:
               prerelease: true,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: "${{ env.CHANGELOG }}"
+              body: "$(cat changelog.txt)"
             })
