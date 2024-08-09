@@ -81,7 +81,7 @@ jobs:
       - uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea #v7.0.1
         with:
           script: |
-            echo "${{ steps.run-changelog.outputs.* }}"
+            echo "${{ steps.run-changelog.outputs }}"
             github.rest.repos.createRelease({
               tag_name: ${{ github.event.inputs.tag }},
               name: '${{ github.event.inputs.tag }}',

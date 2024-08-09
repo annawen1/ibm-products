@@ -172,6 +172,8 @@ function generateLog() {
   );
 
   console.log(log);
+
+  return log;
 }
 
 generateLog();
