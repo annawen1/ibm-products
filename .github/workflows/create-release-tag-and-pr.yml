@@ -86,14 +86,51 @@ jobs:
       - uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea #v7.0.1
         with:
           script: |
-            echo ${{ steps.changelog.outputs.content }}
+            const changelog = '## `@carbon/ibm-products@2.47.0-rc.0`
+              ### Features :rocket:
+              - feat(ConditionBuilder): design review changes (#5762)
+              - feat(GetStartedCard): update to typescript (#5719)
 
-            # github.rest.repos.createRelease({
-            #   tag_name: '${{ github.event.inputs.tag }}',
-            #   name: '${{ github.event.inputs.tag }}',
-            #   draft: false,
-            #   prerelease: true,
-            #   owner: context.repo.owner,
-            #   repo: context.repo.repo,
-            #   body: '${{ steps.changelog.outputs.content }}'
-            # })
+              ### Bug fixes :bug:
+              - fix: datagrid hidden virtual body width (#5798)
+              - fix: datagrid sort reset (#5795)
+              - fix(PageHeader): correct conditional for non zero offsets (#5791)
+              - fix(CreateFullPage): breadcrumb style issue (#5761)
+              - fix(Datagrid): only remove single filter for correct table id (#5654)
+              - fix(datagrid): screen reader misreads datagrid table headers (#5716)
+              - fix: navigation tab usage in story (#5692)
+              - fix(Datagrid): editable cell shifting focus to the below cell after edit (#5744)
+              - fix(Tearsheet): focus specified els for stacked tearsheets (#5631)
+
+              ### Housekeeping :house:
+              - chore(lint-license): add lint checker (#5657)
+              - refactor(Card): convert to typescript (#5760)
+              - refactor(UserAvatar): convert to typescript (#5771)
+              - refactor(action-bar): convert to typescript (#5733)
+              - refactor(EmptyState): add types to EmptyState (#5711)
+              - chore(storybook): move canary to experimental section (#5645)
+              - chore: tagoverflow typescript conversion (#5715)
+              - refactor(FullPageError): convert to typescript (#5746)
+              - refactor(EmptyStateV2): add typescript types (#5747)
+
+              ## `@carbon/ibm-products-styles@2.43.0-rc.0`
+              ### Features :rocket:
+              - feat(ConditionBuilder): design review changes (#5762)
+
+              ### Bug fixes :bug:
+              - fix(CreateFullPage): breadcrumb style issue (#5761)
+              - fix(datagrid): screen reader misreads datagrid table headers (#5716)
+              - fix(CreateModal): unnecessary background removed (#5741)
+
+              ### Housekeeping :house:
+              - chore(lint-license): add lint checker (#5657)'
+
+            github.rest.repos.createRelease({
+              tag_name: '${{ github.event.inputs.tag }}',
+              name: '${{ github.event.inputs.tag }}',
+              draft: false,
+              prerelease: true,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: changelog
+            })
