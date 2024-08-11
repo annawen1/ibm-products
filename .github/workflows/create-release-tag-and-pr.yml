@@ -10,7 +10,7 @@ on:
         required: true
         description: 'release tag (ie. v2.46.0-rc.0)'
         type: string
-        default: 'v2.46.0-rc.0'
+        default: 'v2.49.0-rc.0'
       previous-tag:
         # Previous release tag to grab changelogs from
         # To pick the previous tag:
@@ -20,13 +20,13 @@ on:
         required: true
         description: 'previous release tag (ie. v2.45.0)'
         type: string
-        default: 'v2.45.0'
+        default: 'v2.48.0'
       create-pr:
         # set to true to create PR to merge changes from release to `main` branch
         required: true
         description: 'Create PR?'
         type: boolean
-        default: true
+        default: false
 
 jobs:
   create-pull-request:
@@ -92,5 +92,5 @@ jobs:
               prerelease: true,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: '${{ steps.changelog.outputs.content }}'
+              body: 'Hello'
             })
