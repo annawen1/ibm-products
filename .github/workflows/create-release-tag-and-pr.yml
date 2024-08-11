@@ -92,5 +92,5 @@ jobs:
               prerelease: true,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: "${{ steps.changelog.outputs.content }}"
+              body: '${{ steps.changelog.outputs.content }}'
             })
