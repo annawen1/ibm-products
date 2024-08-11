@@ -83,16 +83,23 @@ jobs:
           path: ./changelog.txt
           trim: true
 
-      - uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea #v7.0.1
+      # - uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea #v7.0.1
+      #   with:
+      #     script: |
+      #       github.rest.repos.createRelease({
+      #         tag_name: '${{ github.event.inputs.tag }}',
+      #         name: '${{ github.event.inputs.tag }}',
+      #         draft: false,
+      #         prerelease: true,
+      #         owner: context.repo.owner,
+      #         repo: context.repo.repo,
+      #         body: |
+      #           ${{ steps.changelog.outputs.contents }}
+      #       })
+
+      - uses: ncipollo/release-action@v1
         with:
-          script: |
-            github.rest.repos.createRelease({
-              tag_name: '${{ github.event.inputs.tag }}',
-              name: '${{ github.event.inputs.tag }}',
-              draft: false,
-              prerelease: true,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: |
-                ${{ steps.changelog.outputs.contents }}
-            })
+          tag: '${{ github.event.inputs.tag }}'
+          name: '${{ github.event.inputs.tag }}'
+          prerelease: true
+          bodyFile: './changelog.txt'
