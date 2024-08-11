@@ -93,5 +93,6 @@ jobs:
               prerelease: true,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: '## `@carbon/ibm-products@2.47.0-rc.0`'
+              body: |
+                ${{ steps.changelog.outputs.contents }}
             })
