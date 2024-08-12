@@ -15,7 +15,7 @@
 [![GitHub Lerna version](https://img.shields.io/github/lerna-json/v/carbon-design-system/ibm-products)](https://lerna.js.org)
 [![PRs welcome](https://img.shields.io/badge/PRs-welcome-brightgreen)](https://github.com/carbon-design-system/ibm-products/blob/master/.github/CONTRIBUTING.md)
 
-## 🚀 Getting started
+## 🚀 Getting started now
 
 If you’re just getting started and looking to browse our React components, take
 a look at [our Storybook](https://ibm-products.carbondesignsystem.com).
